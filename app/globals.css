@@ -2,6 +2,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 
 /* Custom root variables for color theming */
 :root {
@@ -14,6 +16,7 @@
 
 /* Global body styles */
 body {
+  font-family: 'Poppins', sans-serif;
   color: rgb(var(--foreground-rgb));
   background-color: rgb(var(--background-start-rgb)); /* Set body background to white */
 }
@@ -407,4 +410,35 @@ video {
   box-sizing: border-box; /* Include padding and border in element's total width and height */
   white-space: pre-wrap; /* Ensure text wraps properly */
   word-wrap: break-word; /* Break long words to avoid overflow */
+}
+
+.yellow {
+  background-color: rgb(224, 226, 28);
+}
+
+.text-yellow {
+  color: rgb(224, 226, 28);
+}
+
+.border-yellow {
+  border-color: rgb(224, 226, 28);
+}
+
+.yellow-hover:hover {
+  background-color: rgb(224, 226, 28);
+}
+
+.custom-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 150%;
+  height: .8px;
+  background-color: black;
 }
