@@ -239,14 +239,7 @@ main {
   align-items: center; /* Center items horizontally */
   margin-top: 50px; /* Adjust this value to control the space above the post containers */
 }
-/* Parent Container */
-main {
-  padding: 0; /* Remove any padding if it affects spacing */
-  margin: 0; /* Remove any margin if it affects spacing */
-  display: flex;
-  flex-direction: column;
-  gap: 1px; /* Adjust to your preference */
-}
+
 
 /* Post Container */
 .post-container {
