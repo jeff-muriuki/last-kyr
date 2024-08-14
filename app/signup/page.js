@@ -1,5 +1,7 @@
+"use client"
 import React, { useState } from "react";
 //import 'bootstrap-icons/font/bootstrap-icons.css'
+import "bootstrap/dist/css/bootstrap.css";
 
 function SignUp({ setUser }) {
     const [username, setUsername] = useState("");
