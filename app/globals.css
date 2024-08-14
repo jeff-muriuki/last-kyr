@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -17,6 +19,7 @@
 }
 
 body {
+  font-family: 'Poppins', sans-serif;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -30,4 +33,35 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.yellow {
+  background-color: rgb(224, 226, 28);
+}
+
+.text-yellow {
+  color: rgb(224, 226, 28);
+}
+
+.border-yellow {
+  border-color: rgb(224, 226, 28);
+}
+
+.yellow-hover:hover {
+  background-color: rgb(224, 226, 28);
+}
+
+.custom-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 150%;
+  height: .8px;
+  background-color: black;
 }
