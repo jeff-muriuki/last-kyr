@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Button from './Button';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
 import { MdGTranslate } from 'react-icons/md';
-import { translations } from './translations'; 
+import { translations } from './translations';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +41,7 @@ const Navbar = () => {
           <Link href="/Get Legal Assistance" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('getLegalAssistance')}</Link>
           <Link href="/Educate" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('educate')}</Link>
           <Link href="/about" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('about')}</Link>
-          <Link href="/login" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('login')}</Link>
+          <li><Link href="/signup" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('signup')}</Link></li>
           <div className="relative">
             <button onClick={toggleDropdown} className="flex items-center gap-2">
               <MdGTranslate className="text-black bg-white p-2 w-8 h-8 cursor-pointer" />
@@ -70,7 +70,7 @@ const Navbar = () => {
           <li><Link href="/Get Legal Assistance" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('getLegalAssistance')}</Link></li>
           <li><Link href="/Educate" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('educate')}</Link></li>
           <li><Link href="/about" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('about')}</Link></li>
-          <li><Link href="/login" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('login')}</Link></li>
+          <li><Link href="/signup" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('signup')}</Link></li>
           <div className="py-5">
             <Button />
           </div>
