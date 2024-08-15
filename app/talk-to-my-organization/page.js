@@ -14,8 +14,7 @@ const OrganizationReviewPage = () => {
       reviews: 25,
       industry: 'Banking',
       description: 'Guaranty Trust Bank is a leading African Financial Institution...',
-      logo: 'GT',
-      color: 'bg-orange-500',
+      logo: '/images/gt-bank-logo.png',
     },
     {
       name: 'RUBIS',
@@ -23,8 +22,7 @@ const OrganizationReviewPage = () => {
       reviews: 99,
       industry: 'Petroleum',
       description: 'Rubis Energy Kenya is part of the leading Pan-African oil marketing company...',
-      logo: 'R',
-      color: 'bg-red-500',
+      logo: '/images/rubis-logo.png',
     },
     {
       name: 'NAIVAS',
@@ -32,17 +30,15 @@ const OrganizationReviewPage = () => {
       reviews: 990,
       industry: 'Supply chain',
       description: 'Naivas supermarket is the largest supermarket chain in Kenya...',
-      logo: 'N',
-      color: 'bg-orange-500',
+      logo: '/images/naivas-logo.png',
     },
     {
       name: 'BRITAM',
       locations: '7 African countries',
       reviews: 79,
-      industry: 'Finances',
+      industry: 'Insurance',
       description: 'Britam holdings is a leading diversified financial services group...',
-      logo: 'B',
-      color: 'bg-blue-500',
+      logo: '/images/britam-logo.png',
     },
     {
       name: 'QUICKMART',
@@ -50,8 +46,7 @@ const OrganizationReviewPage = () => {
       reviews: 109,
       industry: 'Supply chain',
       description: 'Quickmart is the second largest supply chain in Kenya...',
-      logo: 'Q',
-      color: 'bg-red-500',
+      logo: '/images/quickmart-logo.png',
     },
     {
       name: 'SAFARICOM',
@@ -59,30 +54,28 @@ const OrganizationReviewPage = () => {
       reviews: 9990,
       industry: 'Communication',
       description: 'Safaricom is the largest telecomunication provider in Kenya...',
-      logo: 'S',
-      color: 'bg-green-500',
+      logo: '/images/safaricom-logo.png',
     },
     {
       name: 'EQUITY',
       locations: '50 locations',
       reviews: 101,
-      industry: 'BANKING',
+      industry: 'Banking',
       description: 'Equity is a financial services holding company based in the African great lakes region...',
-      logo: 'E',
-      color: 'bg-red-900',
+      logo: '/images/equity-logo.png',
     },
     {
       name: 'BAMBURI CEMENT',
       locations: '3 locations',
       reviews: 120,
       industry: 'Construction',
-      description: 'Bamburi cement is a leading cement and concrete oruducer in East Africa that is listed on the Nairobi securities exchange...',
-      logo: '/images/BAMBURI-CEMENT-LOGO.jpg',
-      color: 'bg-green-500',
+      description: 'Bamburi cement is a leading cement and concrete producer in East Africa that is listed on the Nairobi securities exchange...',
+      logo: '/public/BAMBURI-CEMENT-LOGO.jpg',
     },
   ]);
   const [selectedOrganization, setSelectedOrganization] = useState(null);
   const [newReview, setNewReview] = useState('');
+  const [selectedIndustry, setSelectedIndustry] = useState('');
 
   const counties = [
     'Baringo', 'Bomet', 'Bungoma', 'Busia', 'Elgeyo-Marakwet', 'Embu', 'Garissa', 
@@ -95,17 +88,34 @@ const OrganizationReviewPage = () => {
   ];
 
   const sectors = ['Finance', 'Trade', 'Construction', 'Transport', 'Energy',  'Hospitality'];
-  const industries = ['Supply chain', 'Banking', 'Petroleum', 'Hotel', 'Insurance', 'Transport'];
+  const industries = ['Supply chain', 'Banking', 'Petroleum', 'Hotel', 'Insurance', 'Communication'];
 
   const handleSearch = (event) => {
     const value = event.target.value.toLowerCase();
     setSearchTerm(value);
+    filterOrganizations(value, selectedIndustry);
+  };
 
-    const filtered = organizations.filter(org =>
-      org.name.toLowerCase().includes(value) ||
-      org.industry.toLowerCase().includes(value) ||
-      org.description.toLowerCase().includes(value)
-    );
+  const handleIndustryChange = (event) => {
+    const value = event.target.value;
+    setSelectedIndustry(value);
+    filterOrganizations(searchTerm, value);
+  };
+
+  const filterOrganizations = (searchTerm, industry) => {
+    let filtered = organizations;
+
+    if (searchTerm) {
+      filtered = filtered.filter(org =>
+        org.name.toLowerCase().includes(searchTerm) ||
+        org.industry.toLowerCase().includes(searchTerm) ||
+        org.description.toLowerCase().includes(searchTerm)
+      );
+    }
+
+    if (industry) {
+      filtered = filtered.filter(org => org.industry === industry);
+    }
 
     setFilteredOrganizations(filtered);
   };
@@ -130,7 +140,7 @@ const OrganizationReviewPage = () => {
     }
   };
 
-  const displayedOrganizations = searchTerm ? filteredOrganizations : organizations;
+  const displayedOrganizations = searchTerm || selectedIndustry ? filteredOrganizations : organizations;
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -180,8 +190,12 @@ const OrganizationReviewPage = () => {
                     <option key={index} value={sector} className="text-black">{sector}</option>
                   ))}
                 </select>
-                <select className="w-full p-2 border rounded text-black">
-                  <option className="text-black">Select an industry</option>
+                <select 
+                  className="w-full p-2 border rounded text-black"
+                  value={selectedIndustry}
+                  onChange={handleIndustryChange}
+                >
+                  <option className="text-black" value="">Select an industry</option>
                   {industries.map((industry, index) => (
                     <option key={index} value={industry} className="text-black">{industry}</option>
                   ))}
@@ -190,29 +204,23 @@ const OrganizationReviewPage = () => {
             </div>
 
             {/* Results */}
-            <div className="w-3/4">
+            <div className="w-3/4 grid grid-cols-2 gap-4">
               {displayedOrganizations.map((org, index) => (
                 <div 
                   key={index} 
-                  className="flex items-start mb-4 pb-4 border-b cursor-pointer" 
+                  className="bg-white p-4 rounded-lg shadow-md cursor-pointer" 
                   onClick={() => handleOrganizationClick(org)}
                 >
-                  <div className={`w-16 h-16 ${org.color} flex items-center justify-center text-white font-bold rounded`}>
-                    {org.logo}
-                  </div>
-                  <div className="ml-4 flex-grow">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h3 className="font-bold text-black">{org.name}</h3>
-                        <p className="text-sm text-black">{org.locations}</p>
-                      </div>
-                      <div className="text-right">
-                        <p className="font-bold text-black">{org.reviews} Reviews</p>
-                        <p className="text-sm text-black">Industry: {org.industry}</p>
-                      </div>
+                  <div className="flex items-center">
+                    <img src={org.logo} alt={`${org.name} logo`} className="w-16 h-16 rounded mr-4" />
+                    <div>
+                      <h3 className="font-bold text-black">{org.name}</h3>
+                      <p className="text-sm text-black">{org.locations}</p>
+                      <p className="font-bold text-black">{org.reviews} Reviews</p>
+                      <p className="text-sm text-black">Industry: {org.industry}</p>
                     </div>
-                    <p className="mt-2 text-sm text-black">{org.description}</p>
                   </div>
+                  <p className="text-sm mt-2 text-black">{org.description}</p>
                 </div>
               ))}
             </div>
@@ -222,8 +230,8 @@ const OrganizationReviewPage = () => {
 
       {/* Modal */}
       {selectedOrganization && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-1/2">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
             <h3 className="text-xl font-bold mb-4 text-black">Review {selectedOrganization.name}</h3>
             <textarea
               className="w-full p-2 border rounded mb-4 text-black"
