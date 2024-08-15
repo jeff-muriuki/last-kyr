@@ -41,15 +41,14 @@ main {
 
 /* Right Sidebar Styles */
 .right-sidebar {
-  width: 194px;
-  height: 100vh; /* Ensure the right sidebar takes full height */
-  position: fixed;
-  right: 0;
-  top: 0;
+  width: 184px;
+  height: 87vh; /* Ensure the right sidebar takes full height */
+  position: relative; /* Change from fixed to relative */
   background-color: white;
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 
 /* Community Container */
 .community-container {
@@ -179,18 +178,14 @@ main {
 /* Top Container */
 .top-container {
   width: 763px;
-  height: 226px;
+  height: 326px;
   background-color: #fff; /* Adjust color as needed */
-  margin: 0 auto; /* Center horizontally */
-  position: absolute; /* Position it absolutely */
-  top: 0; /* Stick it to the top of the parent container */
-  left: 50%; /* Center horizontally in the parent */
-  transform: translateX(-50%); /* Adjust for centering */
+  margin: 70px auto 0 auto; /* Adjust top margin based on navbar height */
   border: 1px solid #ccc; /* Optional border */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
   display: flex;
   align-items: center;
-  padding: 16px; /* Adjust padding as needed */
+  padding: 20px; /* Adjust padding as needed */
 }
 
 /* Profile Photo Container */
@@ -237,7 +232,7 @@ main {
   display: flex;
   flex-direction: column; /* Align items vertically in a column */
   align-items: center; /* Center items horizontally */
-  margin-top: 50px; /* Adjust this value to control the space above the post containers */
+  margin-top: 30px; /* Adjust this value to control the space above the post containers */
 }
 
 
@@ -246,7 +241,7 @@ main {
   margin-top: 1px; /* Adjust this value to control how far below the container should be */
   width: 80%; /* Set the width to your preference */
   max-width: 790px; /* Optional: Limit the maximum width */
-  margin-left: 240px; /* Adjust this value to move the container slightly to the left */
+  margin-left: auto; /* Adjust this value to move the container slightly to the left */
   margin-right: auto; /* Pushes the container to the left */
   background-color: #f9f9f9; /* Optional: Background color */
   padding: 15px; /* Optional: Padding inside the post container */
@@ -256,7 +251,7 @@ main {
 }
 /* First Post Container */
 .first-post-container {
-  margin-top: 250px; /* Increase this value to bring the first container lower */
+  margin-top: 90px; /* Increase this value to bring the first container lower */
 }
 /* Ensure paragraphs inside post container wrap and don't overflow */
 .post-content {
