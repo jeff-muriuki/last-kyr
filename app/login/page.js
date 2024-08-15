@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/navigation';
+import Hero from '../components/common/Hero'
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -40,6 +41,8 @@ export default function Login() {
   };
 
   return (
+  <>
+    <Hero />
     <div className="flex flex-col lg:flex-row h-screen">
       <div className="w-full lg:w-1/2 bg-[#E0E21C] text-black flex flex-col items-center justify-center p-6 lg:p-10">
         <Head>
@@ -111,5 +114,6 @@ export default function Login() {
         />
       </div>
     </div>
+    </>
   );
 }
