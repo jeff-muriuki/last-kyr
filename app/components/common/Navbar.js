@@ -1,83 +1,142 @@
-"use client";
-
-import React, { useState } from 'react';
-import Link from 'next/link';
-import Button from './Button';
-import { HiOutlineDotsVertical } from 'react-icons/hi';
-import { MdGTranslate } from 'react-icons/md';
-import { translations } from './translations';
+"use client"
+import { useState } from 'react'
+import Link from 'next/link'
+import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai'
+import { MdGTranslate } from 'react-icons/md'
+import { HiOutlineDotsVertical } from "react-icons/hi";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [language, setLanguage] = useState('en'); // Default language
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+  const [menuIcon, setMenuIcon] = useState(false)
 
-  const changeLanguage = (lng) => {
-    setLanguage(lng);
-    setDropdownOpen(false);
-  };
+  const handleSmallerScreensNavigation = () => {
 
-  const t = (key) => translations[language][key]; 
+    setMenuIcon(!menuIcon);
 
+
+  } 
   return (
-    <nav className="bg-gray-800 text-gray-300 p-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="flex items-center">
-          <img src="Logo.png" alt="logo" className="md:cursor-pointer h-20" />
-          <button onClick={toggleMenu} className="md:hidden text-gray-300 focus:outline-none ml-4">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-            </svg>
-          </button>
-        </div>
+    <div>
+        <header className='bg-black text-white w-full ease-in duration-300 fixed top-0 left-0 z-10 lg:mt-12'>
+          <nav className='max-w-[1366px] mx-auto h-[100px] flex items-center lg:justify-center justify-between p-4'>
+            <div className='lg:mr-3'>
+              <Link href='/' onClick={handleSmallerScreensNavigation}>
+                  <img src='Logo.png' className='w-auto max-h-[100px]'></img>
+                  {/* <span className='uppercase font-extrabold text-3xl md:text-2xl xl:text-3xl '>avascript</span> */}
+              </Link>
+            </div>
 
-        <div className="hidden md:flex items-center space-x-4">
-          <Link href="/" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('home')}</Link>
-          <Link href="/talk-to-my-government" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('talkToMyGovernment')}</Link>
-          <Link href="/talk-to-my-organisation" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('talkToMyOrganisation')}</Link>
-          <Link href="/Get Legal Assistance" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('getLegalAssistance')}</Link>
-          <Link href="/Educate" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('educate')}</Link>
-          <Link href="/about" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('about')}</Link>
-          <li><Link href="/signup" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('signup')}</Link></li>
-          <div className="relative">
-            <button onClick={toggleDropdown} className="flex items-center gap-2">
-              <MdGTranslate className="text-black bg-white p-2 w-8 h-8 cursor-pointer" />
-              <span className="text-xs">{t('translate')}</span>
-            </button>
-            {dropdownOpen && (
-              <div className="absolute top-full right-0 mt-2 bg-white text-black rounded shadow-lg w-32 z-10">
-                <ul className="list-none p-2">
-                  <li onClick={() => changeLanguage('en')} className="px-4 py-2 hover:bg-gray-200 cursor-pointer">English</li>
-                  <li onClick={() => changeLanguage('es')} className="px-4 py-2 hover:bg-gray-200 cursor-pointer">Spanish</li>
-                  <li onClick={() => changeLanguage('fr')} className="px-4 py-2 hover:bg-gray-200 cursor-pointer">French</li>
-                  <li onClick={() => changeLanguage('de')} className="px-4 py-2 hover:bg-gray-200 cursor-pointer">German</li>
-                </ul>
+            {/* large screen navigation */}
+            <ul className='hidden md:flex font-semibold text-white items-center justify-center cursor-pointer'>
+                <li className='mr-5 lg:mr-8 hover:text-[#E0E21C] sm:text-[11px] lg:text-[14px] text-center'>
+                    <Link href=''>
+                    Home
+                    </Link>
+                </li>
+                <li className='mr-5 lg:mr-8 hover:text-[#E0E21C] sm:text-[11px] md:text-[11px] lg:text-[14px] text-center'>
+                    <Link href='/talk-to-my-government'>
+                    Talk to my <br/> government
+                    </Link>
+                </li>
+                <li className='mr-5 lg:mr-8 hover:text-[#E0E21C] sm:text-[11px] lg:text-[14px] text-center'>
+                    <Link href='/talk-to-my-organisation'>
+                    Talk to my <br/> Organization
+                    </Link>
+                </li>
+                <li className='mr-5 lg:mr-8 hover:text-[#E0E21C] sm:text-[11px] lg:text-[14px] text-center'>
+                    <Link href='/Get Legal Assistance'>
+                      Get legal <br/> Assistance
+                    </Link>
+                </li>
+                <li className='mr-5 lg:mr-8 hover:text-[#E0E21C] sm:text-[11px] lg:text-[14px] text-center'>
+                  <Link href='/Educate'>Educate</Link>
+                </li>
+                <li className='mr-5 lg:mr-8 hover:text-[#E0E21C] sm:text-[11px] lg:text-[14px] text-center'>
+                  <Link href='/about'>
+                        About
+                  </Link>
+                </li>
+                <li className='hover:text-[#E0E21C] sm:text-[11px] text-center flex flex-col items-center'>
+                  <MdGTranslate className="hover:font-bold lg:bg-red lg: lg:text-black lg:bg-white lg:p-1 lg:mb-1 font-bold sm:p-1 sm:w-7 p-2 w-8 h-8"/>
+                  <span className='sm:text-[7px] lg:text-[10px] text-center'>Translate</span> </li>
+              
+            </ul>
+            <div className="hidden text-white gap-3 md:flex lg:mx-6">
+               <HiOutlineDotsVertical />
+            </div>
+
+            <div className = "hidden md:flex">
+              <div className='flex'>
+              <Link href='/'>
+                  <button className=" mr-5 md:mr-2 lg:mr-8 border-2 border-[#E0E21C] text-[#E0E21C] sm:text-[11px] sm:px-2 lg:text-[13px] rounded lg:px-4 lg:py-2 sm:py-1 sm:px:1">Login</button>
+                </Link>
+                <Link href='/'>
+                  <button className="bg-[#E0E21C] text-black hover:bg-white hover:text-[#E0E21C] sm:text-[11px] sm:px-2 lg:text-[13px] rounded lg:px-2 lg:py-2.5 sm:py-1.5">Sign Up</button>
+                </Link>
               </div>
-            )}
-          </div>
-          <HiOutlineDotsVertical className="text-white text-2xl" />
-          <Button />
-        </div>
+            </div>
 
-        {/* Mobile menu */}
-        <ul className={`md:hidden fixed top-0 left-0 w-full bg-white overflow-y-auto py-24 pl-4 transition-transform duration-500 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-          <li><Link href="/" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('home')}</Link></li>
-          <li><Link href="/talk-to-my-government" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('talkToMyGovernment')}</Link></li>
-          <li><Link href="/talk-to-my-organisation" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('talkToMyOrganisation')}</Link></li>
-          <li><Link href="/Get Legal Assistance" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('getLegalAssistance')}</Link></li>
-          <li><Link href="/Educate" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('educate')}</Link></li>
-          <li><Link href="/about" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('about')}</Link></li>
-          <li><Link href="/signup" className="block px-4 py-2 hover:bg-gray-700 hover:text-yellow-400">{t('signup')}</Link></li>
-          <div className="py-5">
-            <Button />
-          </div>
-        </ul>
-      </div>
-    </nav>
-  );
-};
 
-export default Navbar;
+            {/* smaller screens: Navigation icons */}
+            {/* on click - change the icon*/}
+
+            <div onClick={handleSmallerScreensNavigation} className='flex md:hidden'>
+                {menuIcon ? (<AiOutlineClose size={25} className = 'text-[#E0E21C]'/>) 
+                : (<AiOutlineMenu size={25} className = 'text-[#E0E21C]'/>)}
+
+            </div>
+
+            {/* small screen navbar*/}
+            <div className={menuIcon ? 
+              
+              'md:hidden absolute top-[100px] right-o left-0 flex w-full h-screen bg-black text-white text-center ease-in duration-300' : 
+              
+              'md:hidden absolute top-[100px] right-0 left-[-100%] flex w-full h-screen bg-black text-white text-center ease-in duration-300'}>
+                
+                <div className='w-full'>
+                  <ul className='uppercase font-bold text-[12px]'>
+                    <li onClick={handleSmallerScreensNavigation} className='py-5 hover:text-[#E0E21C] cursor-pointer'>
+                      <Link href='/'>Home</Link>
+                    </li>
+                    <li onClick={handleSmallerScreensNavigation} className='py-5 hover:text-[#E0E21C] cursor-pointer'>
+                    <Link href='/talk-to-my-government'>Talk to my government</Link>
+                    </li>
+                    <li onClick={handleSmallerScreensNavigation} className='py-5 hover:text-[#E0E21C] cursor-pointer'>
+                    <Link href='/talk-to-my-organisation'>Talk to my organization</Link>
+                    </li>
+                    <li onClick={handleSmallerScreensNavigation} className='py-5 hover:text-[#E0E21C] cursor-pointer'>
+                    <Link href='/Get Legal Assistance'>Get legal assistance</Link>
+                    </li>
+                    <li onClick={handleSmallerScreensNavigation} className='py-5 hover:text-[#E0E21C] cursor-pointer'>
+                    <Link href='/'>Talk to my government</Link>
+                    </li>
+                    <li onClick={handleSmallerScreensNavigation} className='py-5 hover:text-[#E0E21C] cursor-pointer'>
+                    <Link href='/Educate'>Educate</Link>
+                    </li>
+                    <li onClick={handleSmallerScreensNavigation} className='py-5 hover:text-[#E0E21C] cursor-pointer'>
+                    <Link href='/about'>About</Link>
+                    </li>
+                  </ul>
+
+                  <div className='flex flex-col justify-center items-center mt-8'>
+                      <Link href='/' onClick={handleSmallerScreensNavigation}>
+                          <button className='bg-[#E0E21C] text-slate-800 rounded uppercase py-1 w-[200px] mb-5'>login</button>
+                      </Link>
+                      <Link href='/signup' onClick={handleSmallerScreensNavigation}>
+                          <button className='bg-[#E0E21C] text-slate-800 rounded uppercase py-1 w-[200px] mb-5'>
+                            <Link href='/signup'>Sign Up</Link></button>
+                      </Link>
+                  </div>
+                </div>
+
+            </div>
+
+
+          </nav>
+        </header>
+
+    </div>
+  )
+}
+
+export default Navbar
