@@ -1,23 +1,21 @@
-"use client";
 import React, { useState } from 'react';
 
 const CommentForm = ({ postId, onComment }) => {
-  const [comment, setComment] = useState("");
+  const [commentText, setCommentText] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (comment.trim() === "") return;
-
-    onComment(postId, { text: comment });
-    setComment("");
+    if (commentText.trim()) {
+      onComment(postId, { text: commentText });
+      setCommentText(""); // Clear the input field after submission
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="comment-form mt-4">
+    <form onSubmit={handleSubmit} className="comment-form">
       <textarea
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
+        value={commentText}
+        onChange={(e) => setCommentText(e.target.value)}
         placeholder="Add a comment..."
         className="w-full p-2 border border-gray-300 rounded"
       />
@@ -32,3 +30,6 @@ const CommentForm = ({ postId, onComment }) => {
 };
 
 export default CommentForm;
+
+
+

@@ -68,7 +68,7 @@ const TimelinePage = () => {
     console.log('Vote response:', { postId, type });
   };
 
-  const toggleComments = (postId) => {
+  const onToggleComments = (postId) => {
     setShowComments((prev) => ({
       ...prev,
       [postId]: !prev[postId],
@@ -109,7 +109,6 @@ const TimelinePage = () => {
         <div className="flex flex-1">
           <Sidebar />
           <main className="flex-1 p-4">
-            {/* Updated top container */}
             <div className="mt-24 mb-4 w-full max-w-7xl mx-auto p-5 bg-gray-200 shadow-md rounded-lg flex items-start">
               <div className="mr-7">
                 <input
@@ -171,9 +170,9 @@ const TimelinePage = () => {
                   post={post}
                   comments={comments[post.id] || []}
                   showComments={showComments[post.id] || false}
-                  toggleComments={() => toggleComments(post.id)}
-                  handleVote={handleVote}
-                  handleComment={handleComment}
+                  onToggleComments={onToggleComments} // Ensure this is passed correctly
+                  onVote={handleVote}
+                  onComment={handleComment}
                 />
               </div>
             ))}
@@ -192,3 +191,4 @@ const TimelinePage = () => {
 };
 
 export default TimelinePage;
+

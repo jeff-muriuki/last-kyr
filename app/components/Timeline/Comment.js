@@ -1,7 +1,6 @@
-"use client";
 import React from 'react';
 
-const Comment = ({ postId, comments }) => {
+const Comment = ({ comments = [] }) => {
   return (
     <div className="comments-list">
       {comments.map((comment) => (
@@ -14,3 +13,5 @@ const Comment = ({ postId, comments }) => {
 };
 
 export default Comment;
+
+

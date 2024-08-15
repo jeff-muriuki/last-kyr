@@ -1,8 +1,7 @@
-"use client";
 import React from 'react';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
-import UpvoteDownvote from './UpvoteDownvote'; // Ensure you import the UpvoteDownvote component
+import UpvoteDownvote from './UpvoteDownvote';
 
 const Post = ({ post, onVote, onToggleComments, showComments, onComment, comments }) => {
   if (!post || !post.attributes) {
@@ -32,7 +31,6 @@ const Post = ({ post, onVote, onToggleComments, showComments, onComment, comment
       </div>
       <div className="post-content mt-2">
         <p>{Content}</p>
-        {/* Render media if it exists */}
         {post.media && (
           <div className="media-container mt-2">
             {post.media.type === 'video' ? (
@@ -47,20 +45,17 @@ const Post = ({ post, onVote, onToggleComments, showComments, onComment, comment
         )}
       </div>
       <div className="post-actions flex items-center justify-between mt-2">
-        <UpvoteDownvote
-          postId={id}
-          onVote={onVote}
-        />
-        <button 
-          onClick={() => onToggleComments(id)} 
+        <UpvoteDownvote postId={id} onVote={onVote} />
+        <button
+          onClick={() => onToggleComments(id)}
           className="toggle-comments-button px-4 py-2 bg-yellow-500 text-black rounded"
         >
-          {showComments[id] ? 'Hide Comments' : `View ${comments.length} Comments`}
+          {showComments ? 'Hide Comments' : `View ${comments.length} Comment${comments.length !== 1 ? 's' : ''}`}
         </button>
       </div>
-      {showComments[id] && (
+      {showComments && (
         <div className="comments-section mt-4">
-          <Comment postId={id} comments={comments} />
+          <Comment comments={comments} />
           <CommentForm postId={id} onComment={onComment} />
         </div>
       )}
@@ -69,3 +64,7 @@ const Post = ({ post, onVote, onToggleComments, showComments, onComment, comment
 };
 
 export default Post;
+
+
+
+

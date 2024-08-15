@@ -24,7 +24,6 @@ const UpvoteDownvote = ({ postId, onVote }) => {
 
   return (
     <div className="flex items-center bg-yellow-500 text-black rounded-lg overflow-hidden shadow-md h-9 w-56">
-      {/* Upvote section */}
       <button
         onClick={handleUpvote}
         className="flex items-center justify-center w-1/2 h-full p-2"
@@ -36,7 +35,6 @@ const UpvoteDownvote = ({ postId, onVote }) => {
 
       <div className="border-l border-black h-full"></div>
 
-      {/* Downvote section */}
       <button
         onClick={handleDownvote}
         className="flex items-center justify-center w-1/2 h-full p-2"
@@ -49,3 +47,4 @@ const UpvoteDownvote = ({ postId, onVote }) => {
 };
 
 export default UpvoteDownvote;
+
