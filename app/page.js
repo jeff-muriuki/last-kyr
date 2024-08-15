@@ -177,15 +177,13 @@ const TimelinePage = () => {
               </div>
             ))}
 
-            <div className="mt-8">
-              <Services /> {/* Insert Services component */}
-              <Partners /> {/* Insert Partners component */}
-              <Impact /> {/* Insert Impact component */}
-            </div>
           </main>
           <RightSidebar />
         </div>
       </div>
+      <Services /> {/* Insert Services component */}
+              <Partners /> {/* Insert Partners component */}
+              <Impact /> {/* Insert Impact component */}
     </>
   );
 };
