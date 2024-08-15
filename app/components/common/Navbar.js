@@ -17,7 +17,7 @@ const Navbar = () => {
   } 
   return (
     <div>
-        <header className='bg-black text-white w-full ease-in duration-300 fixed top-0 left-0 z-10 lg:mt-12'>
+        <header className='bg-black text-white w-full ease-in duration-300  top-0 left-0 z-10 lg:mt-12'>
           <nav className='max-w-[1366px] mx-auto h-[100px] flex items-center lg:justify-center justify-between p-4'>
             <div className='lg:mr-3'>
               <Link href='/' onClick={handleSmallerScreensNavigation}>
@@ -67,10 +67,10 @@ const Navbar = () => {
 
             <div className = "hidden md:flex">
               <div className='flex'>
-              <Link href='/'>
+              <Link href='/login'>
                   <button className=" mr-5 md:mr-2 lg:mr-8 border-2 border-[#E0E21C] text-[#E0E21C] sm:text-[11px] sm:px-2 lg:text-[13px] rounded lg:px-4 lg:py-2 sm:py-1 sm:px:1">Login</button>
                 </Link>
-                <Link href='/'>
+                <Link href='/signup'>
                   <button className="bg-[#E0E21C] text-black hover:bg-white hover:text-[#E0E21C] sm:text-[11px] sm:px-2 lg:text-[13px] rounded lg:px-2 lg:py-2.5 sm:py-1.5">Sign Up</button>
                 </Link>
               </div>
