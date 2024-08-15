@@ -255,46 +255,7 @@ const OrganizationReviewPage = () => {
         </div>
       )}
 
-      {/* Footer */}
-      <footer className="bg-gray-800 text-white py-8">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-between">
-            <div>
-              <h3 className="font-bold mb-2 text-white">Social Media</h3>
-              <div className="flex space-x-2">
-                <a href="https://www.facebook.com/kyrafrica" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                  <FaFacebook className="text-xl hover:text-gray-400" />
-                </a>
-                <a href="https://twitter.com/kyrafrica" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                  <FaTwitter className="text-xl hover:text-gray-400" />
-                </a>
-                <a href="https://www.linkedin.com/company/kyrafrica" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                  <FaLinkedin className="text-xl hover:text-gray-400" />
-                </a>
-                <a href="https://www.instagram.com/kyrafrica" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                  <FaInstagram className="text-xl hover:text-gray-400" />
-                </a>
-              </div>
-            </div>
-            <div>
-              <h3 className="font-bold mb-2 text-white">Contacts</h3>
-              <p className="text-white">Address: Riverside, Moi, Kenya, 00200</p>
-              <p className="text-white">Phone: 0101129466</p>
-              <p className="text-white">Email: consult@kyrafrica.com</p>
-            </div>
-            <div>
-              <h3 className="font-bold mb-2 text-white">Newsletter</h3>
-              <input type="email" placeholder="Your email" className="p-2 rounded text-black" />
-              <button className="bg-yellow-500 text-white px-4 py-2 rounded mt-2">Subscribe</button>
-            </div>
-            <div>
-              <h3 className="font-bold mb-2 text-white">Legal</h3>
-              <p className="text-white">Terms of Service</p>
-              <p className="text-white">Privacy Policy</p>
-            </div>
-          </div>
-        </div>
-      </footer>
+      
     </div>
   );
 };
