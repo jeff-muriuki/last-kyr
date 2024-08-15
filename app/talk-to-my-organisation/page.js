@@ -14,7 +14,7 @@ const OrganizationReviewPage = () => {
       reviews: 25,
       industry: 'Banking',
       description: 'Guaranty Trust Bank is a leading African Financial Institution...',
-      logo: '/images/gt-bank-logo.png',
+      logo: '/gt.jpeg',
     },
     {
       name: 'RUBIS',
@@ -22,7 +22,7 @@ const OrganizationReviewPage = () => {
       reviews: 99,
       industry: 'Petroleum',
       description: 'Rubis Energy Kenya is part of the leading Pan-African oil marketing company...',
-      logo: '/images/rubis-logo.png',
+      logo: '/rubis.jpeg',
     },
     {
       name: 'NAIVAS',
@@ -30,7 +30,7 @@ const OrganizationReviewPage = () => {
       reviews: 990,
       industry: 'Supply chain',
       description: 'Naivas supermarket is the largest supermarket chain in Kenya...',
-      logo: '/images/naivas-logo.png',
+      logo: '/naivas.png',
     },
     {
       name: 'BRITAM',
@@ -38,7 +38,7 @@ const OrganizationReviewPage = () => {
       reviews: 79,
       industry: 'Insurance',
       description: 'Britam holdings is a leading diversified financial services group...',
-      logo: '/images/britam-logo.png',
+      logo: '/britam.png',
     },
     {
       name: 'QUICKMART',
@@ -46,7 +46,7 @@ const OrganizationReviewPage = () => {
       reviews: 109,
       industry: 'Supply chain',
       description: 'Quickmart is the second largest supply chain in Kenya...',
-      logo: '/images/quickmart-logo.png',
+      logo: '/quickmart.jpeg',
     },
     {
       name: 'SAFARICOM',
@@ -54,7 +54,7 @@ const OrganizationReviewPage = () => {
       reviews: 9990,
       industry: 'Communication',
       description: 'Safaricom is the largest telecomunication provider in Kenya...',
-      logo: '/images/safaricom-logo.png',
+      logo: '/safari.png',
     },
     {
       name: 'EQUITY',
@@ -62,7 +62,7 @@ const OrganizationReviewPage = () => {
       reviews: 101,
       industry: 'Banking',
       description: 'Equity is a financial services holding company based in the African great lakes region...',
-      logo: '/images/equity-logo.png',
+      logo: '/equity.png',
     },
     {
       name: 'BAMBURI CEMENT',
@@ -70,7 +70,7 @@ const OrganizationReviewPage = () => {
       reviews: 120,
       industry: 'Construction',
       description: 'Bamburi cement is a leading cement and concrete producer in East Africa that is listed on the Nairobi securities exchange...',
-      logo: '/public/BAMBURI-CEMENT-LOGO.jpg',
+      logo: '/BAMBURI-CEMENT-LOGO.jpg',
     },
   ]);
   const [selectedOrganization, setSelectedOrganization] = useState(null);
