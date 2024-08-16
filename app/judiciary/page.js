@@ -63,7 +63,7 @@ const Judiciary = () => {
             <h3 className="font-bold text-black">Tribunals</h3>
           </div>
           <div className="yellow text-black rounded-full border border-black flex flex-col justify-center items-center text-center p-4 mx-auto max-w-md w-full my-4">
-            <h3 className="font-bold text-black">Khadhi's Court</h3>
+            <h3 className="font-bold text-black">Khadhis Court</h3>
           </div>
           <div className="yellow text-black rounded-full border border-black flex flex-col justify-center items-center text-center p-4 mx-auto max-w-md w-full my-4">
             <h3 className="font-bold text-black">Court Martials</h3>
