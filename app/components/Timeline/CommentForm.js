@@ -1,23 +1,26 @@
 import React, { useState } from 'react';
 
 const CommentForm = ({ postId, onComment }) => {
-  const [commentText, setCommentText] = useState("");
+  const [comment, setComment] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (commentText.trim()) {
-      onComment(postId, { text: commentText });
-      setCommentText(""); // Clear the input field after submission
+    console.log("Submitting comment:", comment); // Log comment before submitting
+    if (comment.trim()) {
+      onComment(postId, comment); // Call onComment with the postId and comment
+      setComment(''); // Clear the comment input
+    } else {
+      console.error("Comment cannot be empty");
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="comment-form">
       <textarea
-        value={commentText}
-        onChange={(e) => setCommentText(e.target.value)}
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
         placeholder="Add a comment..."
-        className="w-full p-2 border border-gray-300 rounded"
+        className="w-full p-2 border rounded"
       />
       <button
         type="submit"
@@ -30,6 +33,9 @@ const CommentForm = ({ postId, onComment }) => {
 };
 
 export default CommentForm;
+
+
+
 
 
 
