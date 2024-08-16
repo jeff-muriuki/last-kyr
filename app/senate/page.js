@@ -1,65 +1,42 @@
 "use client";
-
-const senators = {
-  "elected": [
-    "Adan Dullo Fatuma",
-    "Agnes Kavindu",
-    "Ali Ibrahim Roba",
-    "Ali Mohamed Abdi",
-    "Beatrice Ogolla",
-    "Boniface Mutinda Kabaka",
-    "Charles Kibiru",
-    "Christopher Langat",
-    "Cleophas Malala",
-    "Dr. Ochillo Ayacko",
-    "Gideon Moi",
-    "Godana Hargura",
-    "Godfrey Osotsi",
-    "Ibrahim Yusuf Haji",
-    "Irungu Kang'ata",
-    "John Kinyua Nderitu",
-    "Johnson Sakaja",
-    "Kimani Wamatangi",
-    "Kipchumba Murkomen",
-    "Lennox Mumelo",
-    "Ledama Olekina",
-    "Margaret Kamar",
-    "Michael Mbito",
-    "Mohamed Faki Mwinyihaji",
-    "Mwangi Githiomi",
-    "Mwaura Isaac",
-    "Mutula Kilonzo Jr.",
-    "Njeru Ndwiga",
-    "Onyango Kajwang",
-    "Phillip Mpaayei",
-    "Prengei Victor",
-    "Sakaja Johnson",
-    "Sam Ongeri",
-    "Susan Kihika",
-    "Tabitha Mutinda",
-    "Wario Golich Juma",
-    "Isaac Mwaura",
-    "Gertrude Musuruve",
-  ],
-  "nominated": [
-    "Amos Wako",
-    "Beatrice Ogolla",
-    "Rose Nyamunga",
-    "Millicent Omanga",
-    "Naomi Jillo Waqo",
-    "Mercy Chebeni",
-    "Beth Mugo",
-  ],
-  "political": [
-    "Ali Mohamed Abdi",
-    "Cleophas Malala",
-    "Ledama Olekina",
-    "Mutula Kilonzo Jr.",
-    "John Kinyua Nderitu",
-  ]
-};
+import { useEffect, useState } from "react";
 
 const Senate = () => {
+  const [senators, setSenators] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchSenators = async () => {
+      try {
+        const response = await fetch("https://necessary-card-750e65ba7c.strapiapp.com/api/senators");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        console.log(data); // Log the response to see its structure
+
+        // Extracting senator names from the response
+        const senatorsList = data.data.map(senator => senator.attributes.Name);
+        setSenators(senatorsList);
+        setLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
+
+    fetchSenators();
+  }, []);
+
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
+
+  // if (error) {
+  //   return <div>Error: {error}</div>;
+  // }
+
   return (
     <div className="bg-white p-4" style={{
       backgroundImage: 'url(/Africa.jpg)',
@@ -68,35 +45,11 @@ const Senate = () => {
     }}>
       <h1 className="text-2xl md:text-4xl text-black font-bold text-center my-8">Legislature</h1>
 
-      {/* Elected Senators Section */}
+      {/* Senators Section */}
       <section className="my-8 p-4 md:p-12">
-        <h2 className="text-xl md:text-2xl text-black font-bold mb-8 md:mb-16">Elected Senators</h2>
+        <h2 className="text-xl md:text-2xl text-black font-bold mb-8 md:mb-16">Members of the Senate</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {senators.elected.map((senator, index) => (
-            <div key={index} className="bg-black text-yellow rounded-full border border-black flex flex-col justify-center items-center text-center p-4">
-              <h3 className="font-bold">{senator}</h3>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Nominated Senators Section */}
-      <section className="my-8 p-4 md:p-12">
-        <h2 className="text-xl md:text-2xl text-black font-bold mb-8 md:mb-16">Nominated Senators</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {senators.nominated.map((senator, index) => (
-            <div key={index} className="bg-black text-yellow rounded-full border border-black flex flex-col justify-center items-center text-center p-4">
-              <h3 className="font-bold">{senator}</h3>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Political Senators Section */}
-      <section className="my-8 p-4 md:p-12">
-        <h2 className="text-xl md:text-2xl text-black font-bold mb-8 md:mb-16">Political Senators</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {senators.political.map((senator, index) => (
+          {senators.map((senator, index) => (
             <div key={index} className="bg-black text-yellow rounded-full border border-black flex flex-col justify-center items-center text-center p-4">
               <h3 className="font-bold">{senator}</h3>
             </div>

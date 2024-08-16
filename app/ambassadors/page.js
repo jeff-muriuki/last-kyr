@@ -1,69 +1,33 @@
 "use client";
-
-const kenyanAmbassadors = {
-  uk: {
-    name: "Catherine Kirumba Karemu",
-    location: "London, United Kingdom",
-  },
-  zambia: {
-    name: "Lilian Tomitom",
-    location: "Lusaka, Zambia",
-  },
-  canada: {
-    name: "Caroline Kamende Daudi",
-    location: "Ottawa, Canada",
-  },
-  egypt: {
-    name: "Fred Outa",
-    location: "Cairo, Egypt",
-  },
-  ghana: {
-    name: "Vincent Mogaka Kemosi",
-    location: "Accra, Ghana",
-  },
-  usa: {
-    name: "David Kiplagat Kerich",
-    location: "Washington D.C., United States",
-  },
-  russia: {
-    name: "Dr. Peter Mutuku Mathuki",
-    location: "Moscow, Russia",
-  },
-  senegal: {
-    name: "Anne Kisaka Nanguli",
-    location: "Dakar, Senegal",
-  },
-  morocco: {
-    name: "Jessica Muthoni Gakinya",
-    location: "Rabat, Morocco",
-  },
-  netherlands: {
-    name: "Halima Yusuf Mucheke",
-    location: "The Hague, Netherlands",
-  },
-  cuba: {
-    name: "Everylyne Mwenda Karisa",
-    location: "Havana, Cuba",
-  },
-  losAngeles: {
-    name: "Ezra Chiloba",
-    location: "Los Angeles, United States",
-  },
-  pakistan: {
-    name: "Lt. Gen. Peter Mbogo Njiru",
-    location: "Islamabad, Pakistan",
-  },
-  iran: {
-    name: "Lt. Gen. Jonah Mwangi",
-    location: "Tehran, Iran",
-  },
-  uganda: {
-    name: "Joash Maangi",
-    location: "Kampala, Uganda",
-  },
-};
+import { useEffect, useState } from "react";
 
 const Ambassadors = () => {
+  const [ambassadors, setAmbassadors] = useState([]);
+
+  useEffect(() => {
+    const fetchAmbassadors = async () => {
+      try {
+        const response = await fetch("https://necessary-card-750e65ba7c.strapiapp.com/api/ambassadors");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        console.log(data); // Log the response to see its structure
+
+        // Extracting ambassador names and locations from the response
+        const ambassadorsList = data.data.map(ambassador => ({
+          name: ambassador.attributes.Name,
+          location: ambassador.attributes.Location
+        }));
+        setAmbassadors(ambassadorsList);
+      } catch (error) {
+        console.error("Error fetching ambassadors:", error.message);
+      }
+    };
+
+    fetchAmbassadors();
+  }, []);
+
   return (
     <div
       className="bg-white p-4"
@@ -82,10 +46,10 @@ const Ambassadors = () => {
           Current Ambassadors
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {Object.entries(kenyanAmbassadors).map(([country, ambassador], index) => (
+          {ambassadors.map((ambassador, index) => (
             <div
               key={index}
-              className="yellow text-black rounded-full border border-black flex flex-col justify-center items-center text-center p-4"
+              className="bg-black text-yellow rounded-full border border-black flex flex-col justify-center items-center text-center p-4"
             >
               <h3 className="font-bold">{ambassador.name}</h3>
               <p>({ambassador.location})</p>
