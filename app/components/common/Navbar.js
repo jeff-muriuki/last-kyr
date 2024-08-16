@@ -118,18 +118,19 @@ const Navbar = () => {
                     </li>
                   </ul>
 
-                  <div className='flex flex-col justify-center items-center mt-8'>
-                      <Link href='/' onClick={handleSmallerScreensNavigation}>
-                          <button className='bg-[#E0E21C] text-slate-800 rounded uppercase py-1 w-[200px] mb-5'>login</button>
-                      </Link>
-                      <Link href='/signup' onClick={handleSmallerScreensNavigation}>
-                          <button className='bg-[#E0E21C] text-slate-800 rounded uppercase py-1 w-[200px] mb-5'>
-                            <Link href='/signup'>Sign Up</Link></button>
-                      </Link>
-                  </div>
-                </div>
-
+                  
+           <div className='flex flex-col justify-center items-center mt-8'>
+               <Link href='/login' onClick={handleSmallerScreensNavigation} className='w-[200px] mb-5'>
+                <button className='bg-[#E0E21C] text-slate-800 rounded uppercase py-1 w-full'>Login</button>
+              </Link>
+  
+             <Link href='/signup' onClick={handleSmallerScreensNavigation} className='w-[200px] mb-5'>
+              <button className='bg-[#E0E21C] text-slate-800 rounded uppercase py-1 w-full'>Sign Up</button>
+              </Link>
+             </div>
             </div>
+
+          </div>
 
 
           </nav>
