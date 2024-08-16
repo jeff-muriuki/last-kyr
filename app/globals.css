@@ -1,33 +1,432 @@
+/* Import Tailwind base, components, and utilities */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+
+/* Custom root variables for color theming */
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background-start-rgb: 255, 255, 255; /* Set the start color to white */
+  --background-end-rgb: 255, 255, 255;   /* Set the end color to white */
+  --background-color: #D9D9D9; /* New global background color for specific components */
+  --action-button-color: #E0E21C; /* Color for action buttons */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
+/* Global body styles */
 body {
+  font-family: 'Poppins', sans-serif;
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: rgb(var(--background-start-rgb)); /* Set body background to white */
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Main content area should allow scrolling if needed */
+main {
+  min-height: 100vh; /* Ensure the main content takes at least the full viewport height */
+}
+
+/* Sidebar styles */
+.sidebar {
+  background-color: white; /* Set the desired background color */
+  color: black; /* Update the text color if needed */
+  width: 217px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Right Sidebar Styles */
+.right-sidebar {
+  width: 184px;
+  height: 87vh; /* Ensure the right sidebar takes full height */
+  position: relative; /* Change from fixed to relative */
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Community Container */
+.community-container {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Community Heading */
+.community-heading {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: #4A4A4A;
+}
+
+/* WhatsApp Button Subcontainer */
+.whatsapp-container {
+  width: 100%;
+  height: 50px; /* Adjusted height to fit content better */
+  margin-bottom: 150px; /* Added margin to separate from the search bar */
+}
+
+.whatsapp-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #15D035;
+  color: black;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s;
+}
+
+.whatsapp-button:hover {
+  background-color: #13C830; /* Adjusted hover color for better contrast */
+}
+
+.whatsapp-icon {
+  margin-right: 0.5rem;
+}
+
+/* Search Bar Subcontainer */
+.search-bar {
+  width: 100%;
+  height: 40px; /* Adjusted height to fit content better */
+  display: flex;
+  align-items: center;
+  position: relative; /* Set position relative to contain the icon */
+}
+
+.search-input {
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+  padding-right: 2.5rem; /* Add padding-right to make space for the icon */
+  border-radius: 9999px;
+  background-color: #E0E21C; /* Updated background color */
+  border: none;
+  outline: none;
+  color: #333;
+}
+
+.search-icon {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #555;
+}
+
+/* Groups List Styles */
+.groups-list {
+  margin-top: 1rem;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Group Item */
+.group-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+/* Group Image Wrapper */
+.group-img-wrapper {
+  background-color: var(--background-color); /* Background color for image container */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 43px; /* Adjust width to match the desired image container size */
+  height: 43px;
+  border-radius: 50%; /* Ellipse shape */
+  overflow: hidden; /* Ensure image stays within the ellipse */
+}
+
+.group-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Group Content Container */
+.group-content-container {
+  background-color: var(--background-color); /* Background color for text container */
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  color: #000;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  margin-left: 0.5rem;
+}
+
+/* Top Container */
+.top-container {
+  width: 763px;
+  height: 326px;
+  background-color: #fff; /* Adjust color as needed */
+  margin: 70px auto 0 auto; /* Adjust top margin based on navbar height */
+  border: 1px solid #ccc; /* Optional border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
+  display: flex;
+  align-items: center;
+  padding: 20px; /* Adjust padding as needed */
+}
+
+/* Profile Photo Container */
+.profile-photo-container {
+  width: 86px;
+  height: 89px;
+  background-color: #fff; /* Background color of the circle */
+  border-radius: 50%; /* Makes it circular */
+  overflow: hidden; /* Ensures image fits within the circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px; /* Space between photo and text */
+  border: 0.5px solid #000; /* Black border with 0.5px thickness */
+}
+
+/* Profile Photo */
+.profile-photo {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* Ensures the image covers the container */
+}
+
+/* Ensure the top container has a margin-bottom to push the posts down */
+.top-container {
+  margin-bottom: 60px; /* Adjust this value to control spacing below the top container */
+}
+
+/* Wrapper for post containers to ensure they have spacing from the top */
+.post-container-wrapper {
+  margin-top: 250px; /* Adjust this value to control the space above the post containers */
+  margin-left: -200px; /* Adjust this value to move the container to the left */
+}
+
+/* Center the post container wrapper */
+.post-container-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 250px; /* Adjust this value to control the space above the post containers */
+}
+
+/* Post Container Wrapper */
+.post-container-wrapper {
+  display: flex;
+  flex-direction: column; /* Align items vertically in a column */
+  align-items: center; /* Center items horizontally */
+  margin-top: 30px; /* Adjust this value to control the space above the post containers */
+}
+
+
+/* Post Container */
+.post-container {
+  margin-top: 1px; /* Adjust this value to control how far below the container should be */
+  width: 80%; /* Set the width to your preference */
+  max-width: 790px; /* Optional: Limit the maximum width */
+  margin-left: auto; /* Adjust this value to move the container slightly to the left */
+  margin-right: auto; /* Pushes the container to the left */
+  background-color: #f9f9f9; /* Optional: Background color */
+  padding: 15px; /* Optional: Padding inside the post container */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+  border-radius: 8px; /* Optional: Rounded corners */
+  margin-bottom: 1px; /* Reduce the space between post containers */
+}
+/* First Post Container */
+.first-post-container {
+  margin-top: 90px; /* Increase this value to bring the first container lower */
+}
+/* Ensure paragraphs inside post container wrap and don't overflow */
+.post-content {
+  margin-bottom: 200px; /* Ensure content doesn’t overlap with the image */
+  overflow-wrap: break-word; /* Break long words to avoid overflow */
+  word-wrap: break-word; /* Additional fallback for older browsers */
+  white-space: normal; /* Allow text to wrap normally */
+}
+
+/* Uploaded Image Styles */
+.uploaded-image {
+  position: absolute;
+  bottom: 80px; /* Position from the bottom of the container */
+  left: 16px; /* Position from the left of the container */
+  width: 150px; /* Set the width of the uploaded image */
+  max-height: 120px; /* Restrict the height to ensure it doesn’t touch buttons */
+  height: auto; /* Allow height to adjust while maintaining aspect ratio */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  object-fit: cover; /* Ensure the image covers the container while maintaining aspect ratio */
+}
+
+/* Ensure there’s enough space around the image */
+.post-container {
+  padding-bottom: 150px; /* Add padding to ensure space for the image and buttons */
+}
+
+
+/* Additional Styling for Action Buttons */
+.action-buttons {
+  position: absolute;
+  bottom: 16px; /* Position the buttons at the bottom of the post container */
+  left: 16px; /* Align buttons to the left */
+  display: flex;
+  gap: 1rem; /* Space between buttons */
+}
+
+/* Action Button Styles */
+.action-button {
+  background-color: var(--action-button-color); /* Background color for action buttons */
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.action-button:hover {
+  background-color: #d4d42d; /* Adjust hover color for contrast */
+}
+
+/* Profile Picture Styles */
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+/* Main Wrapper */
+.main-wrapper {
+  display: flex;
+  gap: 1rem; /* Space between main and right sidebar */
+  justify-content: space-between; /* Space between sidebar and content */
+}
+
+/* Ensure content section takes the remaining width */
+.content-section {
+  flex: 1;
+  background-color: white;
+  padding: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sidebar, .right-sidebar {
+    width: 100%;
+    position: relative; /* Stack sidebars */
+    height: auto;
   }
+  .community-container {
+    width: 100%; /* Full width for mobile */
+    padding: 0.5rem;
+  }
+  .post-container-wrapper {
+    margin-left: 0; /* Remove left margin on small screens */
+  }
+}
+
+
+/* Adjusted Media Container */
+.media-container {
+  height: 480px; /* Set the height of the media container */
+  overflow: hidden; /* Hide any overflow content */
+}
+
+/* Uploaded Image Styles */
+.uploaded-image {
+  position: absolute;
+  bottom: 0; /* Position image at the bottom of the container */
+  left: 16px; /* Position image from the left of the container */
+  width: 150px; /* Set the width of the uploaded image */
+  max-height: 100%; /* Limit the height of the image to the container's height */
+  height: auto; /* Allow height to adjust while maintaining aspect ratio */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  object-fit: cover; /* Ensure the image covers the container while maintaining aspect ratio */
+}
+
+/* Media Container for Video */
+.media-container {
+  position: relative;
+  width: 100%; /* Adjust width as needed */
+  max-width: 584px; /* Maximum width to control scaling */
+  height: auto; /* Maintain aspect ratio */
+  margin: 0 auto; /* Center the container */
+  border-radius: 8px; /* Rounded corners */
+  overflow: hidden; /* Ensure no overflow of video */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Style for Video Element */
+video {
+  width: 100%; /* Full width of the container */
+  height: 500px; /* Set a specific height */
+  object-fit: cover; /* Cover the container while maintaining aspect ratio */
+  border-radius: 8px; /* Rounded corners */
+}
+
+.whats-on-your-mind-input {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+  min-height: 200px; /* Initial height */
+  resize: vertical; /* Allow users to resize the input field vertically */
+  overflow: auto; /* Show scrollbar if content overflows */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  white-space: pre-wrap; /* Ensure text wraps properly */
+  word-wrap: break-word; /* Break long words to avoid overflow */
+}
+
+.yellow {
+  background-color: rgb(224, 226, 28);
+}
+
+.text-yellow {
+  color: rgb(224, 226, 28);
+}
+
+.border-yellow {
+  border-color: rgb(224, 226, 28);
+}
+
+.yellow-hover:hover {
+  background-color: rgb(224, 226, 28);
+}
+
+.custom-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 150%;
+  height: .8px;
+  background-color: black;
 }
