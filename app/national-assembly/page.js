@@ -1,96 +1,65 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import axios from 'axios';
 import { FaPhone, FaEnvelope, FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
-
-const nationalAssembly = {
-  counties: [
-    'Mombasa',
-    'Kwale',
-    'Kilifi',
-    'Tana River',
-    'Lamu',
-    'Taita/Taveta',
-    'Garissa',
-    'Wajir',
-    'Mandera',
-    'Marsabit',
-    'Isiolo',
-    'Meru',
-    'Tharaka-Nithi',
-    'Embu',
-    'Kitui',
-    'Machakos',
-    'Makueni',
-    'Nyandarua',
-    'Nyeri',
-    'Kirinyaga',
-    'Murang\'a',
-    'Kiambu',
-    'Turkana',
-    'West Pokot',
-    'Samburu',
-    'Trans Nzoia',
-    'Uasin Gishu',
-    'Elgeyo/Marakwet',
-    'Nandi',
-    'Baringo',
-    'Laikipia',
-    'Nakuru',
-    'Narok',
-    'Kajiado',
-    'Kericho',
-    'Bomet',
-    'Kakamega',
-    'Vihiga',
-    'Bungoma',
-    'Busia',
-    'Siaya',
-    'Kisumu',
-    'Homa Bay',
-    'Migori',
-    'Kisii',
-    'Nyamira',
-    'Nairobi'
-  ],
-  constituencies: {
-    Nairobi: ['Westlands', 'Langata', 'Kamukunji', 'Westlands', 'Langata', 'Kamukunji'],
-    Mombasa: ['Mvita', 'Nyali', 'Jomvu'],
-    Kisumu: ['Kisumu Central', 'Kisumu East', 'Kisumu West'],
-    Nakuru: ['Nakuru Town East', 'Nakuru Town West', 'Nakuru East'],
-    Eldoret: ['Eldoret North', 'Eldoret South', 'Eldoret West'],
-  },
-};
-
 const NationalAssembly = () => {
-  const [selectedCounty, setSelectedCounty] = useState('Nairobi');
-  const [search, setSearch] = useState('');
+  const [counties, setCounties] = useState([]);
+  const [constituencies, setConstituencies] = useState([]);
+  const [countyConstituencyMap, setCountyConstituencyMap] = useState({});
+  const [selectedCounty, setSelectedCounty] = useState('');
+  const [selectedConstituency, setSelectedConstituency] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    // Fetch counties data
+    axios.get('https://necessary-card-750e65ba7c.strapiapp.com/api/counties')
+      .then(response => {
+        setCounties(response.data.data.map(item => ({
+          id: item.id,
+          name: item.attributes.County
+        })));
+      })
+      .catch(error => console.error('Error fetching counties:', error));
+
+    // Fetch constituencies data
+    axios.get('https://necessary-card-750e65ba7c.strapiapp.com/api/constituencies')
+      .then(response => {
+        const constituenciesData = response.data.data.map(item => ({
+          id: item.id,
+          name: item.attributes.constituency,
+          countyId: item.attributes.County // Assuming County field refers to county ID
+        }));
+        setConstituencies(constituenciesData);
+
+        // Create a mapping from county ID to constituencies
+        const mapping = constituenciesData.reduce((acc, curr) => {
+          if (!acc[curr.countyId]) acc[curr.countyId] = [];
+          acc[curr.countyId].push(curr.name);
+          return acc;
+        }, {});
+        setCountyConstituencyMap(mapping);
+      })
+      .catch(error => console.error('Error fetching constituencies:', error));
+  }, []);
 
   const handleCountySelect = (county) => {
     setSelectedCounty(county);
   };
 
-  const handleSearchChange = (event) => {
-    const searchTerm = event.target.value;
-    setSearch(searchTerm);
-
-    const matchedCounty = nationalAssembly.counties.find((county) =>
-      county.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    if (matchedCounty) {
-      setSelectedCounty(matchedCounty);
-    }
-  };
-
-  const handleConstituencyClick = () => {
+  const handleConstituencyClick = (constituency) => {
+    setSelectedConstituency(constituency);
     setShowPopup(true);
   };
 
   const handleClosePopup = () => {
     setShowPopup(false);
+    setSelectedConstituency(null);
   };
+
+  const selectedCountyId = counties.find(c => c.name === selectedCounty)?.id;
+  const constituenciesForSelectedCounty = selectedCountyId ? countyConstituencyMap[selectedCountyId] || [] : [];
 
   return (
     <div className="bg-white p-4">
@@ -98,7 +67,7 @@ const NationalAssembly = () => {
         <h1 className="text-2xl md:text-4xl text-black font-bold text-center my-8">Find My Legislator/National Assembly</h1>
 
         <div className="flex justify-center my-8">
-          <Image 
+          <Image
             src="/CountiesMap.jpg"
             alt="Map of Kenya"
             width={300}
@@ -113,8 +82,8 @@ const NationalAssembly = () => {
             <input
               type="text"
               placeholder="Search for your county"
-              value={search}
-              onChange={handleSearchChange}
+              value={selectedCounty}
+              onChange={(e) => handleCountySelect(e.target.value)}
               className="border border-black rounded-full bg-black p-2 pr-10 px-8 text-white w-full"
             />
             <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
@@ -124,17 +93,16 @@ const NationalAssembly = () => {
             </span>
           </div>
           <div className="flex flex-wrap yellow justify-center gap-4 p-4">
-          {nationalAssembly.counties.map((county, index) => (
-            <button
-              key={index}
-              onClick={() => handleCountySelect(county)}
-              className={`py-2 px-4 ${selectedCounty === county ? 'bg-black font-bold border rounded-xl text-white' : ' text-black font-bold'
-              } transition-colors duration-300`}
-            >
-              {county}
-            </button>
-          ))}
-        </div>
+            {counties.map((county, index) => (
+              <button
+                key={index}
+                onClick={() => handleCountySelect(county.name)}
+                className={`py-2 px-4 ${selectedCounty === county.name ? 'bg-black font-bold border rounded-xl text-white' : ' text-black font-bold'} transition-colors duration-300`}
+              >
+                {county.name}
+              </button>
+            ))}
+          </div>
         </section>
 
         {/* Constituencies Section */}
@@ -142,22 +110,26 @@ const NationalAssembly = () => {
           <section className="my-8 p-4 md:p-12 text-center">
             <h2 className="text-xl md:text-2xl text-black font-extrabold mb-8">List of constituencies in {selectedCounty}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-auto max-w-4xl">
-              {nationalAssembly.constituencies[selectedCounty]?.map((constituency, index) => (
-                <div 
-                  key={index} 
-                  className="text-black rounded-2xl flex justify-center items-center py-2 m-4 yellow-hover transition-colors duration-300 cursor-pointer"
-                  onClick={handleConstituencyClick}
-                >
-                  <span className="custom-underline">{constituency}</span>
-                </div>
-              )) || <div className="text-black">No constituencies available</div>}
+              {constituenciesForSelectedCounty.length > 0 ? (
+                constituenciesForSelectedCounty.map((constituency, index) => (
+                  <div
+                    key={index}
+                    className="text-black rounded-2xl flex justify-center items-center py-2 m-4 yellow-hover transition-colors duration-300 cursor-pointer"
+                    onClick={() => handleConstituencyClick(constituency)}
+                  >
+                    <span className="custom-underline">{constituency}</span>
+                  </div>
+                ))
+              ) : (
+                <div className="text-black">No constituencies available</div>
+              )}
             </div>
           </section>
         )}
       </div>
 
       {/* Popup Section */}
-      {showPopup && (
+      {showPopup && selectedConstituency && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
           onClick={handleClosePopup}
@@ -165,16 +137,22 @@ const NationalAssembly = () => {
           <div className="bg-black p-8 max-w-4xl w-full flex min-h-[300px]">
             {/* Image Column */}
             <div className="flex-shrink-0 w-1/3 border-8">
-              <img 
+              <img
                 src="/path-to-your-image.jpg"  // Replace with actual image source
-                alt="Constituency Image" 
+                alt="Constituency Image"
                 className="w-full h-full"
               />
             </div>
 
             {/* Details Column */}
             <div className="w-2/3 pl-8">
-              <h2 className="text-xl font-bold mb-4 text-white">Constituency Name</h2>
+              <h2 className="text-xl font-bold mb-4 text-white">{selectedConstituency}</h2>
+
+              {/* Display MPs related to the selected constituency */}
+              {/* Placeholder for MP details; adjust according to your data structure */}
+              <div className="mb-4 text-white">
+                <p>No MP details available</p>
+              </div>
 
               <div className="mb-4 text-white">
                 <div className="flex items-center space-x-2">
@@ -188,13 +166,15 @@ const NationalAssembly = () => {
               </div>
 
               <div className="flex space-x-4 mb-4 text-white">
-                {/* Add social media icons or other relevant information here */}
+                <FaFacebook className="text-gray-400" />
+                <FaTwitter className="text-gray-400" />
+                <FaInstagram className="text-gray-400" />
+                <FaLinkedin className="text-gray-400" />
               </div>
             </div>
           </div>
         </div>
       )}
-
     </div>
   );
 };
