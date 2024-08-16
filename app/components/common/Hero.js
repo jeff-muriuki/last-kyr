@@ -23,7 +23,7 @@ function Page() {
           <div className="w-full md:w-[350px] lg:w-[450px] h-[525px] mt-4 md:mt-0 z-10 ml-auto">
             <img
               src="HomeHero.png"
-              alt="Hero Image"
+              alt="A welcoming hero image representing legal assistance and education provided by Know Your Rights Africa"
               className="w-full h-full object-cover rounded-lg shadow-lg"
             />
           </div>

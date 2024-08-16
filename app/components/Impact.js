@@ -11,7 +11,7 @@ function ImpactSection() {
           <div className="w-full sm:w-1/5 flex flex-col items-center text-center p-4">
             <img
               src="Meeting Room.png"
-              alt="Impact Icon 1"
+              alt="Webinars and Workshops Icon"
               className="w-16 h-16 mb-4"
             />
             <h3 className="text-lg font-poppins font-semibold text-gray-700 mb-2">
@@ -22,66 +22,65 @@ function ImpactSection() {
             </p>
           </div>
 
-      <div className="w-full sm:w-1/5 flex flex-col items-center text-center p-4">
-        <img
-          src="Gold Medal.png"
-          alt="Impact Icon 2"
-          className="w-16 h-16 mb-4"
-        />
-        <h3 className="text-lg font-poppins font-semibold text-gray-700 mb-2">
-          Success Stories
-        </h3>
-        <p className="text-base text-gray-600">
-          50 documented cases per year
-        </p>
-      </div>
+          <div className="w-full sm:w-1/5 flex flex-col items-center text-center p-4">
+            <img
+              src="Gold Medal.png"
+              alt="Success Stories Icon"
+              className="w-16 h-16 mb-4"
+            />
+            <h3 className="text-lg font-poppins font-semibold text-gray-700 mb-2">
+              Success Stories
+            </h3>
+            <p className="text-base text-gray-600">
+              50 documented cases per year
+            </p>
+          </div>
 
-      <div className="w-full sm:w-1/5 flex flex-col items-center text-center p-4">
-        <img
-          src="MultipleMessages.png"
-          alt="Impact Icon 3"
-          className="w-16 h-16 mb-4"
-        />
-        <h3 className="text-lg font-poppins font-semibold text-gray-700 mb-2">
-          User Testimonials
-        </h3>
-        <p className="text-base text-gray-600">
-          200 positive testimonials per year
-        </p>
-      </div>
+          <div className="w-full sm:w-1/5 flex flex-col items-center text-center p-4">
+            <img
+              src="MultipleMessages.png"
+              alt="User Testimonials Icon"
+              className="w-16 h-16 mb-4"
+            />
+            <h3 className="text-lg font-poppins font-semibold text-gray-700 mb-2">
+              User Testimonials
+            </h3>
+            <p className="text-base text-gray-600">
+              200 positive testimonials per year
+            </p>
+          </div>
 
-      <div className="w-full sm:w-1/5 flex flex-col items-center text-center p-4">
-        <img
-          src="Globe.png"
-          alt="Impact Icon 4"
-          className="w-16 h-16 mb-4"
-        />
-        <h3 className="text-lg font-poppins font-semibold text-gray-700 mb-2">
-          Regional Reach
-        </h3>
-        <p className="text-base text-gray-600">
-          Active in 10 countries
-        </p>
-      </div>
+          <div className="w-full sm:w-1/5 flex flex-col items-center text-center p-4">
+            <img
+              src="Globe.png"
+              alt="Regional Reach Icon"
+              className="w-16 h-16 mb-4"
+            />
+            <h3 className="text-lg font-poppins font-semibold text-gray-700 mb-2">
+              Regional Reach
+            </h3>
+            <p className="text-base text-gray-600">
+              Active in 10 countries
+            </p>
+          </div>
 
-      <div className="w-full sm:w-1/5 flex flex-col items-center text-center p-4">
-        <img
-          src="Download.png"
-          alt="Impact Icon 5"
-          className="w-16 h-16 mb-4"
-        />
-        <h3 className="text-lg font-poppins font-semibold text-gray-700 mb-2">
-          Downloads
-        </h3>
-        <p className="text-base text-gray-600">
-          1,000 resource downloads per month
-        </p>
+          <div className="w-full sm:w-1/5 flex flex-col items-center text-center p-4">
+            <img
+              src="Download.png"
+              alt="Downloads Icon"
+              className="w-16 h-16 mb-4"
+            />
+            <h3 className="text-lg font-poppins font-semibold text-gray-700 mb-2">
+              Downloads
+            </h3>
+            <p className="text-base text-gray-600">
+              1,000 resource downloads per month
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
   );
 }
 
 export default ImpactSection;
-

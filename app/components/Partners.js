@@ -11,28 +11,28 @@ function Partners() {
           <div className="w-full sm:w-1/4 flex flex-col items-center text-center p-4">
             <img
               src="moringa.png"
-              alt="Partner 1"
+              alt="Moringa School Logo"
               className="w-29 h-24 mb-4"
             />
           </div>
           <div className="w-full sm:w-1/4 flex flex-col items-center text-center p-4">
             <img
               src="hill.png"
-              alt="Partner 2"
+              alt="Partner Hill Logo"
               className="w-29 h-29 mb-4"
             />
           </div>
           <div className="w-full sm:w-1/4 flex flex-col items-center text-center p-4">
             <img
               src="meru.png"
-              alt="Partner 3"
+              alt="Meru University Logo"
               className="w-35 h-24 mb-6"
             />
           </div>
           <div className="w-full sm:w-1/4 flex flex-col items-center text-center p-4">
             <img
               src="africa.png"
-              alt="Partner 4"
+              alt="Africa Partner Logo"
               className="w-30 h-24 mb-4"
             />
           </div>
@@ -40,28 +40,28 @@ function Partners() {
           <div className="w-full sm:w-1/4 flex flex-col items-center text-center p-4">
             <img
               src="mwaura.png"
-              alt="Partner 5"
+              alt="Mwaura Partner Logo"
               className="w-30 h-24 mb-4"
             />
           </div>
           <div className="w-full sm:w-1/4 flex flex-col items-center text-center p-4">
             <img
               src="research.png"
-              alt="Partner 6"
+              alt="Research Partner Logo"
               className="w-30 h-24 mb-4"
             />
           </div>
           <div className="w-full sm:w-1/4 flex flex-col items-center text-center p-4">
             <img
               src="talk.png"
-              alt="Partner 7"
+              alt="Talk Partner Logo"
               className="w-24 h-24 mb-4"
             />
           </div>
           <div className="w-full sm:w-1/4 flex flex-col items-center text-center p-4">
             <img
               src="tabler.png"
-              alt="Partner 8"
+              alt="Tabler Partner Logo"
               className="w-24 h-24 mb-4"
             />
           </div>

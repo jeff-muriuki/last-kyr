@@ -44,7 +44,7 @@ const Post = ({ post, onVote, onToggleComments, showComments, onComment, comment
                 Your browser does not support the video tag.
               </video>
             ) : (
-              <img src={media.url} alt="Media" className="w-full mt-2" />
+              <img src={media.url} alt="Media picture" className="w-full mt-2" />
             )}
           </div>
         )}
