@@ -9,13 +9,14 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [keepLoggedIn, setKeepLoggedIn] = useState(false);
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://necessary-card-750e65ba7c.strapiapp.com/api/auth/local/', { 
+      const response = await fetch('https://necessary-card-750e65ba7c.strapiapp.com/api/auth/local/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -32,7 +33,11 @@ export default function Login() {
       localStorage.setItem('jwt', data.jwt);
       localStorage.setItem('user', JSON.stringify(data.user));
 
-      router.push('/dashboard'); 
+      setSuccess(true);
+
+      setTimeout(() => {
+        router.push('/talk-to-my-government'); // Redirect to the timeline page after login
+      }, 2000); // Redirect after 2 seconds
     } catch (error) {
       setError(error.message);
     }
@@ -46,6 +51,7 @@ export default function Login() {
           <h1 className="text-2xl lg:text-3xl font-bold mb-4 lg:mb-6">Welcome Back</h1>
 
           {error && <p className="text-red-600">{error}</p>}
+          {success && <p className="text-green-600">Login successful!</p>}
 
           <form className="space-y-4 w-full max-w-md" onSubmit={handleSubmit}>
             <div>

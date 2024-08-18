@@ -9,6 +9,7 @@ export default function Signup() {
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(false); // New state for success message
     const router = useRouter();
 
     const handleSubmit = async (e) => {
@@ -30,10 +31,14 @@ export default function Signup() {
             const data = await response.json();
 
             localStorage.setItem('jwt', data.jwt);
-
             localStorage.setItem('user', JSON.stringify(data.user));
 
-            router.push('/dashboard');
+            setSuccess(true); // Set success to true to show the success message
+
+            setTimeout(() => {
+                router.push('/login');
+            }, 2000); // Redirect to the dashboard after 2 seconds
+
         } catch (error) {
             setError(error.message);
         }
@@ -51,6 +56,7 @@ export default function Signup() {
                 <h1 className="text-2xl lg:text-3xl font-bold mb-4 lg:mb-6">Create an Account</h1>
 
                 {error && <p className="text-red-600">{error}</p>}
+                {success && <p className="text-green-600">You have successfully created an account!</p>} {/* Success message */}
 
                 <form className="space-y-4 w-full max-w-md" onSubmit={handleSubmit}>
                     <div>
