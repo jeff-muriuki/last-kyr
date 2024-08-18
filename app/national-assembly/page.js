@@ -1,7 +1,9 @@
+// components/pages/NationalAssembly.js
 "use client";
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useSearch } from '../components/common/SearchContext';
+import Image from 'next/image';
 import { FaPhone, FaEnvelope, FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
 const NationalAssembly = () => {
@@ -11,6 +13,7 @@ const NationalAssembly = () => {
   const [selectedCounty, setSelectedCounty] = useState('');
   const [selectedConstituency, setSelectedConstituency] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
+  const { searchTerm } = useSearch();
 
   useEffect(() => {
     // Fetch counties data
@@ -61,6 +64,15 @@ const NationalAssembly = () => {
   const selectedCountyId = counties.find(c => c.name === selectedCounty)?.id;
   const constituenciesForSelectedCounty = selectedCountyId ? countyConstituencyMap[selectedCountyId] || [] : [];
 
+  // Filter counties and constituencies based on searchTerm
+  const filteredCounties = counties.filter(county =>
+    county.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const filteredConstituencies = constituenciesForSelectedCounty.filter(constituency =>
+    constituency.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="bg-white p-4">
       <div className={`${showPopup ? 'hidden' : 'block'}`}>
@@ -93,7 +105,7 @@ const NationalAssembly = () => {
             </span>
           </div>
           <div className="flex flex-wrap yellow justify-center gap-4 p-4">
-            {counties.map((county, index) => (
+            {filteredCounties.map((county, index) => (
               <button
                 key={index}
                 onClick={() => handleCountySelect(county.name)}
@@ -110,8 +122,8 @@ const NationalAssembly = () => {
           <section className="my-8 p-4 md:p-12 text-center">
             <h2 className="text-xl md:text-2xl text-black font-extrabold mb-8">List of constituencies in {selectedCounty}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-auto max-w-4xl">
-              {constituenciesForSelectedCounty.length > 0 ? (
-                constituenciesForSelectedCounty.map((constituency, index) => (
+              {filteredConstituencies.length > 0 ? (
+                filteredConstituencies.map((constituency, index) => (
                   <div
                     key={index}
                     className="text-black rounded-2xl flex justify-center items-center py-2 m-4 yellow-hover transition-colors duration-300 cursor-pointer"

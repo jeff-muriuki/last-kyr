@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import { useSearch } from '../components/common/SearchContext';
 
 const Ministries = () => {
   const [cabinetSecretaries, setCabinetSecretaries] = useState([]);
+  const { searchTerm } = useSearch();
 
   useEffect(() => {
     const fetchMinistries = async () => {
@@ -16,11 +18,10 @@ const Ministries = () => {
         const data = await response.json();
 
         // Extract data from API response
-        const cabinetSecretaries = data.data
-          .map(item => ({
-            name: item.attributes.Name || 'Name Not Provided', // Use 'Name Not Provided' if name is missing
-            ministry: item.attributes.Ministry || 'Ministry Not Provided' // Handle missing ministry names
-          }));
+        const cabinetSecretaries = data.data.map((item) => ({
+          name: item.attributes.Name || 'Name Not Provided', // Use 'Name Not Provided' if name is missing
+          ministry: item.attributes.Ministry || 'Ministry Not Provided', // Handle missing ministry names
+        }));
         
         setCabinetSecretaries(cabinetSecretaries);
       } catch (error) {
@@ -30,6 +31,13 @@ const Ministries = () => {
 
     fetchMinistries();
   }, []);
+
+  // Filtered list of cabinet secretaries based on searchTerm
+  const filteredCabinetSecretaries = cabinetSecretaries.filter(
+    (cs) =>
+      cs.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      cs.ministry.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="bg-white p-4" style={{
@@ -43,7 +51,7 @@ const Ministries = () => {
       <section className="my-8 p-4 md:p-12">
         <h2 className="text-xl md:text-2xl text-black font-bold mb-8 md:mb-16">The Cabinet Secretaries</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {cabinetSecretaries.map((cs, index) => (
+          {filteredCabinetSecretaries.map((cs, index) => (
             <div key={index} className="yellow text-black rounded-full border border-black flex flex-col justify-center items-center text-center">
               <h3 className="font-bold">{cs.name}</h3>
               <p>{cs.ministry}</p>

@@ -1,8 +1,10 @@
+// TalkToMyGovernment.js
 "use client";
 
 import { useState } from 'react';
 import Link from 'next/link';
 import { FaPhone, FaEnvelope, FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { useSearch } from '../components/common/SearchContext'; 
 
 const people = {
   attorneyGeneral: {
@@ -37,6 +39,7 @@ const people = {
 
 const TalkToMyGovernment = () => {
   const [selectedPerson, setSelectedPerson] = useState(null);
+  const { searchTerm } = useSearch();
 
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -44,93 +47,126 @@ const TalkToMyGovernment = () => {
     }
   };
 
+  // Define the sections to filter through
+  const sections = [
+    { name: 'Executive', links: ['The Presidency', 'The Attorney General', 'The Ministries'] },
+    { name: 'Legislature', links: ['National Assembly', 'Senate'] },
+    { name: 'Judiciary', links: ['Superior Courts', 'Subordinate Courts'] },
+    { name: 'State Corporations & Parastatals', links: ['Director of the Parastatal'] },
+    { name: 'Foreign Relations of Kenya', links: ['Ambassadors'] },
+  ];
+
+  // Filter sections and links based on the search term
+  const filteredSections = sections.map(section => ({
+    ...section,
+    links: section.links.filter(link => link.toLowerCase().includes(searchTerm.toLowerCase())),
+  })).filter(section => section.links.length > 0);
+
   return (
     <div className='yellow'>
       <main className="container mx-auto p-4">
         <h1 className="text-4xl text-black font-extrabold text-center my-8">Talk to My Government</h1>
 
-        {['Executive', 'Legislature', 'Judiciary', 'State Corporations & Parastatals', 'Foreign Relations of Kenya'].map((section, index) => (
+        {filteredSections.map((section, index) => (
           <section key={index} className="my-8 bg-black max-w-4xl mx-auto relative">
-            <h2 className="font-normal font-poppins text-center mb-2" style={{ fontSize: '25px' }}>{section}</h2>
+            <h2 className="font-normal font-poppins text-center mb-2" style={{ fontSize: '25px' }}>{section.name}</h2>
             <div className="flex flex-wrap justify-center mt-4 space-x-4">
-              {section === 'Executive' && (
+              {section.name === 'Executive' && (
                 <>
-                  <Link 
-                    href="/presidency" 
-                    className="text-white font-poppins underline" 
-                    style={{ fontSize: '20px', textDecorationColor: '#E0E21C' }}
-                  >
-                    The Presidency
-                  </Link>
+                  {section.links.includes('The Presidency') && (
+                    <Link 
+                      href="/presidency" 
+                      className="text-white font-poppins underline" 
+                      style={{ fontSize: '20px', textDecorationColor: '#E0E21C' }}
+                    >
+                      The Presidency
+                    </Link>
+                  )}
+                  {section.links.includes('The Attorney General') && (
+                    <button
+                      onClick={() => setSelectedPerson('attorneyGeneral')}
+                      className="text-white font-poppins underline"
+                      style={{ fontSize: '20px', textDecorationColor: '#E0E21C' }}
+                    >
+                      The Attorney General
+                    </button>
+                  )}
+                  {section.links.includes('The Ministries') && (
+                    <Link 
+                      href="/ministries" 
+                      className="text-white font-poppins underline" 
+                      style={{ fontSize: '20px', textDecorationColor: '#E0E21C' }}
+                    >
+                      The Ministries
+                    </Link>
+                  )}
+                </>
+              )}
+              {section.name === 'Legislature' && (
+                <>
+                  {section.links.includes('National Assembly') && (
+                    <Link 
+                      href="national-assembly" 
+                      className="text-white font-poppins underline" 
+                      style={{ fontSize: '20px', textDecorationColor: '#E0E21C' }}
+                    >
+                      National Assembly
+                    </Link>
+                  )}
+                  {section.links.includes('Senate') && (
+                    <Link 
+                      href="/senate" 
+                      className="text-white font-poppins underline" 
+                      style={{ fontSize: '20px', textDecorationColor: '#E0E21C' }}
+                    >
+                      Senate
+                    </Link>
+                  )}
+                </>
+              )}
+              {section.name === 'Judiciary' && (
+                <>
+                  {section.links.includes('Superior Courts') && (
+                    <Link 
+                      href="/judiciary" 
+                      className="text-white underline" 
+                      style={{ fontSize: '20px', textDecorationColor: '#E0E21C' }}
+                    >
+                      Superior Courts
+                    </Link>
+                  )}
+                  {section.links.includes('Subordinate Courts') && (
+                    <Link 
+                      href="/judiciary" 
+                      className="text-white font-poppins underline" 
+                      style={{ fontSize: '20px', textDecorationColor: '#E0E21C' }}
+                    >
+                      Subordinate Courts
+                    </Link>
+                  )}
+                </>
+              )}
+              {section.name === 'State Corporations & Parastatals' && (
+                section.links.includes('Director of the Parastatal') && (
                   <button
-                    onClick={() => setSelectedPerson('attorneyGeneral')}
+                    onClick={() => setSelectedPerson('directorOfParastatals')}
                     className="text-white font-poppins underline"
                     style={{ fontSize: '20px', textDecorationColor: '#E0E21C' }}
                   >
-                    The Attorney General
+                    Director of the Parastatal
                   </button>
+                )
+              )}
+              {section.name === 'Foreign Relations of Kenya' && (
+                section.links.includes('Ambassadors') && (
                   <Link 
-                    href="/ministries" 
+                    href="/ambassadors" 
                     className="text-white font-poppins underline" 
                     style={{ fontSize: '20px', textDecorationColor: '#E0E21C' }}
                   >
-                    The Ministries
+                    Ambassadors
                   </Link>
-                </>
-              )}
-              {section === 'Legislature' && (
-                <>
-                  <Link 
-                    href="national-assembly" 
-                    className="text-white font-poppins underline" 
-                    style={{ fontSize: '20px', textDecorationColor: '#E0E21C' }}
-                  >
-                    National Assembly
-                  </Link>
-                  <Link 
-                    href="/senate" 
-                    className="text-white font-poppins underline" 
-                    style={{ fontSize: '20px', textDecorationColor: '#E0E21C' }}
-                  >
-                    Senate
-                  </Link>
-                </>
-              )}
-              {section === 'Judiciary' && (
-                <>
-                  <Link 
-                    href="/judiciary" 
-                    className="text-white underline" 
-                    style={{ fontSize: '20px', textDecorationColor: '#E0E21C' }}
-                  >
-                    Superior Courts
-                  </Link>
-                  <Link 
-                    href="/judiciary" 
-                    className="text-white font-poppins underline" 
-                    style={{ fontSize: '20px', textDecorationColor: '#E0E21C' }}
-                  >
-                    Subordinate Courts
-                  </Link>
-                </>
-              )}
-              {section === 'State Corporations & Parastatals' && (
-                <button
-                  onClick={() => setSelectedPerson('directorOfParastatals')}
-                  className="text-white font-poppins underline"
-                  style={{ fontSize: '20px', textDecorationColor: '#E0E21C' }}
-                >
-                  Director of the Parastatal
-                </button>
-              )}
-              {section === 'Foreign Relations of Kenya' && (
-                <Link 
-                  href="/ambassadors" 
-                  className="text-white font-poppins underline" 
-                  style={{ fontSize: '20px', textDecorationColor: '#E0E21C' }}
-                >
-                  Ambassadors
-                </Link>
+                )
               )}
             </div>
 
